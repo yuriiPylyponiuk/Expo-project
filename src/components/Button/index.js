@@ -21,7 +21,7 @@ export const ButtonUI = ({
     );
   }
   return (
-    <TouchableOpacity style={styles.button(paddingH)} onPointerLeave={press}>
+    <TouchableOpacity style={styles.button(paddingH)} onPress={press}>
       <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity>
   );
