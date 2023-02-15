@@ -8,35 +8,39 @@ export const ButtonUI = ({
   toPage,
   title = "Push",
   paddingH = 20,
+  backColor = "#243763",
+  textColor = "#FFFFFF",
 }) => {
   const navigation = useNavigation();
-  if (type == "custom") {
+  if (type == "navigation") {
     return (
       <TouchableOpacity
         onPress={() => navigation.navigate(toPage)}
-        style={styles.button(paddingH)}
+        style={styles.button(paddingH, backColor)}
       >
-        <Text style={styles.buttonText}>{title}</Text>
+        <Text style={styles.buttonText(textColor)}>{title}</Text>
       </TouchableOpacity>
     );
   }
   return (
-    <TouchableOpacity style={styles.button(paddingH)} onPress={press}>
-      <Text style={styles.buttonText}>{title}</Text>
+    <TouchableOpacity
+      style={styles.button(paddingH, backColor)}
+      onPress={press}
+    >
+      <Text style={styles.buttonText(textColor)}>{title}</Text>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  button: (paddingH) => ({
+  button: (paddingH, backColor) => ({
     borderRadius: 40,
     paddingHorizontal: paddingH,
     paddingVertical: 10,
     alignItems: "center",
-    backgroundColor: "#243763",
-    color: "#FF6E31",
+    backgroundColor: backColor,
   }),
-  buttonText: {
-    color: "#fff",
-  },
+  buttonText: (textColor) => ({
+    color: textColor,
+  }),
 });

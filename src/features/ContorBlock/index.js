@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
+import uuid from "react-native-uuid";
 import { useDispatch } from "react-redux";
+
 import { ButtonUI, InputUI } from "../../components";
 import { addNewTodo } from "..//..//redux/todo/todoAction";
 
@@ -9,7 +11,7 @@ export const ContorBlock = () => {
   const dispatch = useDispatch();
 
   const saveTodo = () => {
-    dispatch(addNewTodo(inputData));
+    dispatch(addNewTodo({ text: inputData, id: uuid.v4() }));
     setInputData("");
   };
 
@@ -23,7 +25,6 @@ export const ContorBlock = () => {
 
 const styles = StyleSheet.create({
   contorBlock: {
-    flex: 1,
     paddingHorizontal: 20,
     paddingVertical: 20,
     flexDirection: "row",

@@ -2,6 +2,7 @@ import * as types from "./todoActionsTypes";
 
 const initialState = {
   todoList: [],
+  showList: false,
 };
 
 export default function reducer(state = initialState, action) {
@@ -10,6 +11,14 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         todoList: [...state.todoList, action.payload],
+        showList: true,
+      };
+    }
+    case types.DELETE_ONE: {
+      return {
+        ...state,
+        todoList: action.payload,
+        showList: true,
       };
     }
     default:

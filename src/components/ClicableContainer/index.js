@@ -1,14 +1,8 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 
-const ClicableContainer = () => {
-  return (
-    <View>
-      <Text>ClicableContainer</Text>
-    </View>
-  );
+export const ClicableContainer = ({ children, userClick }) => {
+  return <TouchableOpacity onPress={userClick}>{children}</TouchableOpacity>;
 };
-
-export default ClicableContainer;
 
 const styles = StyleSheet.create({});

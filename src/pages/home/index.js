@@ -9,7 +9,7 @@ export const Home = ({ navigation }) => {
         <Text style={styles.homeText}>Welcome Home!</Text>
       </View>
       <View style={styles.homeButton}>
-        <ButtonUI title={"Go To Todo"} type="custom" toPage={"Todo"} />
+        <ButtonUI title={"Go To Todo"} type="navigation" toPage={"Todo"} />
       </View>
     </View>
   );
@@ -19,9 +19,12 @@ const styles = StyleSheet.create({
   home: {
     flex: 1,
     paddingTop: 40,
+    backgroundColor: "#fcb75b",
   },
   homeText: {
-    fontSize: 20,
+    fontSize: 24,
+    color: "#243763",
+    fontWeight: "700",
   },
   homeButton: {
     alignItems: "center",
