@@ -10,11 +10,18 @@ export default function reducer(state = initialState, action) {
     case types.ADD_NEW_TODO: {
       return {
         ...state,
-        todoList: [...state.todoList, action.payload],
+        todoList: [action.payload, ...state.todoList],
         showList: true,
       };
     }
     case types.DELETE_ONE: {
+      return {
+        ...state,
+        todoList: action.payload,
+        showList: true,
+      };
+    }
+    case types.DONE_ONE: {
       return {
         ...state,
         todoList: action.payload,

@@ -11,13 +11,13 @@ export const ContorBlock = () => {
   const dispatch = useDispatch();
 
   const saveTodo = () => {
-    dispatch(addNewTodo({ text: inputData, id: uuid.v4() }));
+    dispatch(addNewTodo({ text: inputData, id: uuid.v4(), edit: true }));
     setInputData("");
   };
 
   return (
     <View style={styles.contorBlock}>
-      <InputUI changeInputData={setInputData} value={inputData} width={240} />
+      <InputUI changeInputData={setInputData} value={inputData} width={220} />
       <ButtonUI press={saveTodo} title="Create" paddingH={25} />
     </View>
   );
