@@ -1,31 +1,45 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect } from "react";
 import { FlatList, SafeAreaView, StyleSheet } from "react-native";
 import uuid from "react-native-uuid";
 import { useDispatch, useSelector } from "react-redux";
 
 import { TodoItem } from "../../components";
-import { DeleteOne, DoneOne } from "..//..//redux/todo/todoAction";
+import { clearAll, getData, storeData } from "../../helper/asyncStorage";
+import {
+  DeleteOne,
+  DoneOne,
+  FillFromStore,
+} from "..//..//redux/todo/todoAction";
 
 export const TodosList = () => {
   const list = useSelector((state) => state.todo);
   const dispatch = useDispatch();
 
-  const storeData = async (value) => {
-    await AsyncStorage.setItem("list", value);
-  };
-
-  const getData = async () => {
-    await AsyncStorage.getItem("item1");
-  };
+  useEffect(() => {
+    storeList();
+  }, [list]);
 
   useEffect(() => {
-    console.log(list);
-  }, [list]);
+    setStoredList();
+  }, []);
+
+  const storeList = () => {
+    if (list && list.todoList && list.todoList.length) {
+      storeData(list.todoList);
+    }
+  };
+
+  const setStoredList = async () => {
+    const storedList = await getData();
+    if (storedList) {
+      dispatch(FillFromStore(storedList));
+    }
+  };
 
   const deleteOne = (deleteId) => {
     const newAreyTodos = list.todoList.filter((item) => item.id !== deleteId);
     dispatch(DeleteOne(newAreyTodos));
+    storeData(newAreyTodos);
   };
 
   const showDetails = (detailsId) => {

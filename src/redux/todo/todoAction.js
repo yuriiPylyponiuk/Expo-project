@@ -11,3 +11,6 @@ export const DeleteOne = (payload) => {
 export const DoneOne = (payload) => {
   return { type: types.DONE_ONE, payload };
 };
+export const FillFromStore = (payload) => {
+  return { type: types.FILL_FROM_STORE, payload };
+};

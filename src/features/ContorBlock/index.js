@@ -11,7 +11,8 @@ export const ContorBlock = () => {
   const dispatch = useDispatch();
 
   const saveTodo = () => {
-    dispatch(addNewTodo({ text: inputData, id: uuid.v4(), edit: true }));
+    const newItem = { text: inputData, id: uuid.v4(), edit: true };
+    dispatch(addNewTodo(newItem));
     setInputData("");
   };
 

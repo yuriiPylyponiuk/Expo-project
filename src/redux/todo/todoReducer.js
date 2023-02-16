@@ -28,6 +28,13 @@ export default function reducer(state = initialState, action) {
         showList: true,
       };
     }
+    case types.FILL_FROM_STORE: {
+      return {
+        ...state,
+        todoList: action.payload,
+        showList: true,
+      };
+    }
     default:
       return state;
   }

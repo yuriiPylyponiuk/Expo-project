@@ -1,10 +1,12 @@
+import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { ButtonUI } from "../../components";
 
-export const Home = ({ navigation }) => {
+export const Home = () => {
   return (
     <View style={styles.home}>
+      <StatusBar style="dark" />
       <View style={styles.homeViewText}>
         <Text style={styles.homeText}>Welcome Home!</Text>
       </View>
