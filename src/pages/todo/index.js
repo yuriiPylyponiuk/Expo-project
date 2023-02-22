@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 
-import { ContorBlock, HeaderToDo, TodosList } from "../../features";
+import { ContorBlock, DefaultTodo, HeaderToDo } from "../../features";
 
 export const Todo = () => {
   return (
@@ -10,7 +10,7 @@ export const Todo = () => {
       <StatusBar style="dark" />
       <HeaderToDo />
       <ContorBlock />
-      <TodosList />
+      <DefaultTodo />
     </View>
   );
 };

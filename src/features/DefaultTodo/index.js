@@ -11,7 +11,7 @@ import {
   FillFromStore,
 } from "..//..//redux/todo/todoAction";
 
-export const TodosList = () => {
+export const DefaultTodo = () => {
   const list = useSelector((state) => state.todo);
   const dispatch = useDispatch();
 
