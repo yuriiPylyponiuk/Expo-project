@@ -25,12 +25,12 @@ export const DefaultTodo = () => {
 
   const storeList = () => {
     if (list && list.todoList && list.todoList.length) {
-      storeData(list.todoList);
+      storeData("list", list.todoList);
     }
   };
 
   const setStoredList = async () => {
-    const storedList = await getData();
+    const storedList = await getData("list");
     if (storedList) {
       dispatch(FillFromStore(storedList));
     }
@@ -39,7 +39,7 @@ export const DefaultTodo = () => {
   const deleteOne = (deleteId) => {
     const newAreyTodos = list.todoList.filter((item) => item.id !== deleteId);
     dispatch(DeleteOne(newAreyTodos));
-    storeData(newAreyTodos);
+    storeData("list", newAreyTodos);
   };
 
   const showDetails = (detailsId) => {

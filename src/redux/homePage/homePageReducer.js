@@ -1,7 +1,7 @@
-import * as types from "./homePageAction";
+import * as types from "./homePageActionsTypes";
 
 const initialState = {
-  listOfTitles: [],
+  listOfTodos: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -9,7 +9,13 @@ export default function reducer(state = initialState, action) {
     case types.ADD_NEW_TODO: {
       return {
         ...state,
-        listOfTitles: action.payload,
+        listOfTodos: action.payload,
+      };
+    }
+    case types.ADD_FEW: {
+      return {
+        ...state,
+        listOfTodos: action.payload,
       };
     }
 
