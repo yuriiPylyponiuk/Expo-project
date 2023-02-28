@@ -57,7 +57,5 @@ export const ListOfTodos = () => {
 const styles = StyleSheet.create({
   homeViewText: {
     flex: 1,
-    // alignItems: "center",
-    paddingTop: 20,
   },
 });

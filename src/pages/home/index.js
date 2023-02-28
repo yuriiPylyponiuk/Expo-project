@@ -1,15 +1,16 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
-import { ButtonNewList, ListOfTodos } from "../../features";
+import { CreateNewList, DescriptionBlock, ListOfTodos } from "../../features";
 
 export const Home = () => {
   return (
     <View style={styles.home}>
       <StatusBar style="dark" />
+      <DescriptionBlock />
       <ListOfTodos />
-      <ButtonNewList />
+      <CreateNewList />
     </View>
   );
 };
