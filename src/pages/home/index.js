@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, View } from "react-native";
+import { constants } from "../../constants";
 
 import { CreateNewList, DescriptionBlock, ListOfTodos } from "../../features";
 
@@ -19,6 +20,6 @@ const styles = StyleSheet.create({
   home: {
     flex: 1,
     paddingTop: 40,
-    backgroundColor: "#fcb75b",
+    backgroundColor: constants.color.backgroundDark,
   },
 });

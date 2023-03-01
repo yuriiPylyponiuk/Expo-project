@@ -5,14 +5,15 @@ import { Modal, StyleSheet, Text, View } from "react-native";
 import { ButtonUI, InputUI } from "../../components";
 import { colors } from "../../constants/colors";
 
+const types = [
+  { name: "Select Type", value: "0" },
+  { name: "Default", value: "Default" },
+  { name: "Custom", value: "Custom" },
+];
+
 export const ModalAddNewList = ({ modalVisible, showModal, saveNewList }) => {
   const [inputData, setInputData] = useState("");
   const [selectedType, setSelectedType] = useState();
-  const types = [
-    { name: "Select Type", value: "0" },
-    { name: "Default", value: "Default" },
-    { name: "Custom", value: "Custom" },
-  ];
   const [errorinputData, setErrorInputData] = useState(false);
   const [errorselectedType, setErrorSelectedType] = useState(false);
 

@@ -24,6 +24,7 @@ export const CreateNewList = () => {
   const saveNewList = (data) => {
     const id = uuid.v4();
     let newList;
+
     if (titles.listOfTodos) {
       newList = [
         ...titles.listOfTodos,
@@ -32,12 +33,15 @@ export const CreateNewList = () => {
     } else {
       newList = [{ name: data.inputData, id: id, type: data.selectedType }];
     }
+
     storeData("listOfTodos", newList);
     dispatch(createNew(newList));
     dispatch(resetAllData());
     setModalVisible(false);
+
     navigation.navigate(data.selectedType, {
       id: id,
+      name: data.inputData,
     });
   };
 

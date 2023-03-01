@@ -5,6 +5,7 @@ import uuid from "react-native-uuid";
 import { useDispatch, useSelector } from "react-redux";
 
 import { TodoItem } from "../../components";
+import { constants } from "../../constants";
 import { clearAll, getData, storeData } from "../../helper/asyncStorage";
 import {
   DeleteOne,
@@ -52,15 +53,23 @@ export const DefaultTodo = () => {
 
   const doneOne = (changeId) => {
     let newItem = {};
+    let data = [];
+
     const newAreyTodos = list.todoList.filter((item) => {
       if (item.id == changeId) {
         newItem = { ...item };
-        newItem.edit = false;
+        newItem.done = !newItem.done;
       } else {
         return item;
       }
     });
-    let data = [...newAreyTodos, newItem];
+
+    if (newItem.done) {
+      data = [newItem, ...newAreyTodos];
+    } else {
+      data = [...newAreyTodos, newItem];
+    }
+
     dispatch(DoneOne(data));
   };
 
@@ -76,7 +85,7 @@ export const DefaultTodo = () => {
               deleteClick={deleteOne}
               elem={item.text}
               id={item.id}
-              edit={item.edit}
+              done={item.done}
               doneOne={doneOne}
             />
           )}
@@ -92,7 +101,7 @@ const styles = StyleSheet.create({
     flex: 10,
   },
   flatList: {
-    borderTopColor: "red",
+    borderTopColor: constants.color.blue,
     borderTopWidth: 1,
   },
 });

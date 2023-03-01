@@ -5,6 +5,7 @@ import uuid from "react-native-uuid";
 import { useDispatch, useSelector } from "react-redux";
 
 import { MainListItem } from "../../components";
+import { constants } from "../../constants";
 import {
   clearAll,
   getAllKey,
@@ -38,7 +39,7 @@ export const ListOfTodos = () => {
 
   return (
     <View style={styles.homeViewText}>
-      {titles.listOfTodos && (
+      {titles.listOfTodos ? (
         <FlatList
           data={titles.listOfTodos}
           renderItem={({ item }) => (
@@ -50,6 +51,10 @@ export const ListOfTodos = () => {
           )}
           keyExtractor={() => uuid.v4()}
         />
+      ) : (
+        <View style={styles.homeTextBlck}>
+          <Text style={styles.listOfTodosText}>{"Create your new List"}</Text>
+        </View>
       )}
     </View>
   );
@@ -58,5 +63,15 @@ export const ListOfTodos = () => {
 const styles = StyleSheet.create({
   homeViewText: {
     flex: 1,
+  },
+  homeTextBlck: {
+    marginTop: 40,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  listOfTodosText: {
+    fontSize: 20,
+    color: constants.color.blue,
+    fontWeight: "600",
   },
 });
