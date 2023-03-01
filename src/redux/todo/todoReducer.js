@@ -35,6 +35,13 @@ export default function reducer(state = initialState, action) {
         showList: true,
       };
     }
+    case types.RESET_ALL_DATA: {
+      return {
+        ...state,
+        todoList: [],
+        showList: false,
+      };
+    }
     default:
       return state;
   }

@@ -1,3 +1,4 @@
+import { useRoute } from "@react-navigation/native";
 import React, { useEffect } from "react";
 import { FlatList, SafeAreaView, StyleSheet } from "react-native";
 import uuid from "react-native-uuid";
@@ -12,6 +13,7 @@ import {
 } from "..//..//redux/todo/todoAction";
 
 export const DefaultTodo = () => {
+  const route = useRoute();
   const list = useSelector((state) => state.todo);
   const dispatch = useDispatch();
 
@@ -25,21 +27,23 @@ export const DefaultTodo = () => {
 
   const storeList = () => {
     if (list && list.todoList && list.todoList.length) {
-      storeData("list", list.todoList);
+      storeData(route.params.id, list.todoList);
     }
   };
 
   const setStoredList = async () => {
-    const storedList = await getData("list");
+    const storedList = await getData(route.params.id);
     if (storedList) {
       dispatch(FillFromStore(storedList));
+    } else {
+      dispatch(FillFromStore([]));
     }
   };
 
   const deleteOne = (deleteId) => {
     const newAreyTodos = list.todoList.filter((item) => item.id !== deleteId);
     dispatch(DeleteOne(newAreyTodos));
-    storeData("list", newAreyTodos);
+    storeData(route.params.id, newAreyTodos);
   };
 
   const showDetails = (detailsId) => {

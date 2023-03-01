@@ -5,7 +5,12 @@ import uuid from "react-native-uuid";
 import { useDispatch, useSelector } from "react-redux";
 
 import { MainListItem } from "../../components";
-import { getData, storeData } from "../../helper/asyncStorage";
+import {
+  clearAll,
+  getAllKey,
+  getData,
+  storeData,
+} from "../../helper/asyncStorage";
 import { setTodosList } from "../../redux/homePage/homePageAction";
 
 export const ListOfTodos = () => {
@@ -14,15 +19,10 @@ export const ListOfTodos = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // clearAll();
+    getAllKey();
     setList();
-    // storeData("listOfTodos", [
-    //   { name: "My new list", id: uuid.v4(), type: "DefaulteToDo" },
-    // ]);
   }, []);
-
-  useEffect(() => {
-    // console.log(titles);
-  }, [titles]);
 
   const setList = async () => {
     const value = await getData("listOfTodos");
@@ -32,6 +32,7 @@ export const ListOfTodos = () => {
   const navigateToTodos = (item) => {
     navigation.navigate(item.type, {
       name: item.name,
+      id: item.id,
     });
   };
 

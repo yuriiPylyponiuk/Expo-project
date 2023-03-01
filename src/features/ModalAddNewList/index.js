@@ -5,9 +5,25 @@ import { Modal, StyleSheet, Text, View } from "react-native";
 import { ButtonUI, InputUI } from "../../components";
 import { colors } from "../../constants/colors";
 
-export const ModalAddNewList = ({ modalVisible, showModal }) => {
+export const ModalAddNewList = ({ modalVisible, showModal, saveNewList }) => {
   const [inputData, setInputData] = useState("");
-  const [selectedLanguage, setSelectedLanguage] = useState();
+  const [selectedType, setSelectedType] = useState();
+  const types = [
+    { name: "Select Type", value: "0" },
+    { name: "Default", value: "Default" },
+    { name: "Custom", value: "Custom" },
+  ];
+  const [errorinputData, setErrorInputData] = useState(false);
+  const [errorselectedType, setErrorSelectedType] = useState(false);
+
+  const grabAllData = () => {
+    inputData ? setErrorInputData(false) : setErrorInputData(true);
+    selectedType ? setErrorSelectedType(false) : setErrorSelectedType(true);
+
+    if (inputData && selectedType) {
+      saveNewList({ inputData, selectedType });
+    }
+  };
 
   return (
     <Modal
@@ -27,7 +43,9 @@ export const ModalAddNewList = ({ modalVisible, showModal }) => {
           </Text>
         </View>
         <View style={styles.modalListName}>
-          <Text style={styles.modalListNameText}>{"List Name:"}</Text>
+          <Text style={styles.modalListNameText(errorinputData)}>
+            {"List Name:"}
+          </Text>
           <InputUI
             color={colors.blue}
             height={50}
@@ -37,22 +55,27 @@ export const ModalAddNewList = ({ modalVisible, showModal }) => {
           />
         </View>
         <View style={styles.modalSelect}>
-          <Text style={styles.modalSelectText}>{"List type:"}</Text>
+          <Text style={styles.modalSelectText(errorselectedType)}>
+            {"List type:"}
+          </Text>
           <View style={styles.modalSelectPicker}>
             <Picker
-              selectedValue={selectedLanguage}
-              mode={"dialog"}
-              onValueChange={(itemValue, itemIndex) =>
-                setSelectedLanguage(itemValue)
-              }
+              mode="dialog"
+              selectedValue={selectedType}
+              onValueChange={(v) => setSelectedType(v)}
             >
-              <Picker.Item label="Default" value="Default" />
-              <Picker.Item label="Custom" value="Custom" />
+              {types.map((value, index) => (
+                <Picker.Item
+                  label={value.name}
+                  value={value.value}
+                  key={index}
+                />
+              ))}
             </Picker>
           </View>
         </View>
         <View style={styles.modalSaveButton}>
-          <ButtonUI title="Create" />
+          <ButtonUI press={grabAllData} title="Create" />
         </View>
         <View style={styles.closeBtn}>
           <ButtonUI
@@ -87,11 +110,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginBottom: 10,
   },
-  modalListNameText: {
+  modalListNameText: (errorinputData) => ({
     fontSize: 16,
-    color: colors.blue,
+    color: errorinputData ? "red" : colors.blue,
     marginBottom: 5,
-  },
+  }),
 
   modalSelect: {
     paddingHorizontal: 20,
@@ -102,10 +125,10 @@ const styles = StyleSheet.create({
     display: "flex",
     borderBottomWidth: 1,
   },
-  modalSelectText: {
+  modalSelectText: (errorselectedType) => ({
     fontSize: 16,
-    color: colors.blue,
-  },
+    color: errorselectedType ? "red" : colors.blue,
+  }),
 
   modalSaveButton: {
     paddingHorizontal: 20,

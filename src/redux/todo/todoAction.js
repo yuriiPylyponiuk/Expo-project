@@ -14,3 +14,7 @@ export const DoneOne = (payload) => {
 export const FillFromStore = (payload) => {
   return { type: types.FILL_FROM_STORE, payload };
 };
+
+export const resetAllData = () => {
+  return { type: types.RESET_ALL_DATA };
+};

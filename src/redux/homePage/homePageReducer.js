@@ -18,6 +18,12 @@ export default function reducer(state = initialState, action) {
         listOfTodos: action.payload,
       };
     }
+    case types.CREATE_NEW: {
+      return {
+        ...state,
+        listOfTodos: action.payload,
+      };
+    }
 
     default:
       return state;
