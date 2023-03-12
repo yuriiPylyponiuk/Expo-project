@@ -1,11 +1,19 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import { constants } from "../../constants";
+import { useDispatch } from "react-redux";
 
 import { CreateNewList, DescriptionBlock, ListOfTodos } from "../../features";
+import { setBackgroundColor } from "../../redux/theme/themeAction";
+
+import { constants } from "../../constants";
 
 export const Home = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setBackgroundColor(constants.color.background));
+  }, []);
+
   return (
     <View style={styles.home}>
       <StatusBar style="dark" />
@@ -20,6 +28,6 @@ const styles = StyleSheet.create({
   home: {
     flex: 1,
     paddingTop: 40,
-    backgroundColor: constants.color.backgroundDark,
+    backgroundColor: constants.color.background,
   },
 });

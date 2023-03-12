@@ -1,5 +1,6 @@
 import { Picker } from "@react-native-picker/picker";
-import React, { useState } from "react";
+import * as NavigationBar from "expo-navigation-bar";
+import React, { useEffect, useState } from "react";
 import { Modal, StyleSheet, Text, View } from "react-native";
 
 import { ButtonUI, InputUI } from "../../components";
@@ -17,6 +18,12 @@ export const ModalAddNewList = ({ modalVisible, showModal, saveNewList }) => {
   const [errorinputData, setErrorInputData] = useState(false);
   const [errorselectedType, setErrorSelectedType] = useState(false);
 
+  const showColor = async (themeColor) => {
+    if (themeColor) {
+      await NavigationBar.setBackgroundColorAsync(themeColor);
+    }
+  };
+
   const grabAllData = () => {
     inputData ? setErrorInputData(false) : setErrorInputData(true);
     selectedType ? setErrorSelectedType(false) : setErrorSelectedType(true);
@@ -25,6 +32,10 @@ export const ModalAddNewList = ({ modalVisible, showModal, saveNewList }) => {
       saveNewList({ inputData, selectedType });
     }
   };
+
+  useEffect(() => {
+    showColor(colors.background);
+  }, []);
 
   return (
     <Modal
